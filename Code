@@ -1,6 +1,8 @@
 #include <SPI.h>
 #include <MFRC522.h>
-#define BUZZER 2 
+#define BUZZER 2
+#define ACCESS_DELAY 2000
+#define DENIED_DELAY 1000 
 #define SS_PIN 10
 #define RST_PIN 5
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
@@ -30,7 +32,7 @@ void loop()
   {
     return;
   }
-
+  //Show UID on serial monitor
   Serial.print("UID tag :");
   String content= "";
   byte letter;
@@ -44,7 +46,7 @@ void loop()
   Serial.println();
   Serial.print("Message : ");
   content.toUpperCase();
-  if (content.substring(1) == "2C 93 4A 49") //change here the UID of the card/cards that you want to give access
+  if (content.substring(1) == "2C 93 4A 49") 
   {
     Serial.println("Authorized access");
     Serial.println();
@@ -53,7 +55,7 @@ void loop()
     delay(ACCESS_DELAY);
     digitalWrite(RELAY, HIGH);
   }
-  else if (content.substring(1) == "83 B6 3D 19") //change here the UID of the card/cards that you want to give access
+  else if (content.substring(1) == "83 B6 3D 19") 
   {
     Serial.println("Authorized access");
     Serial.println();
