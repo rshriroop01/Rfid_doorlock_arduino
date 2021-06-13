@@ -30,7 +30,7 @@ void loop()
   {
     return;
   }
-  //Show UID on serial monitor
+
   Serial.print("UID tag :");
   String content= "";
   byte letter;
